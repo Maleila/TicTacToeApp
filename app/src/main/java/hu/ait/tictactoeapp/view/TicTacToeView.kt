@@ -1,12 +1,10 @@
 package hu.ait.tictactoeapp.view
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.PointF
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -14,7 +12,6 @@ import hu.ait.tictactoeapp.MainActivity
 import hu.ait.tictactoeapp.R
 import hu.ait.tictactoeapp.model.TicTacToeModel
 
-//class name capitalized but not package name
 class TicTacToeView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
     private var paintBackground = Paint()
@@ -22,12 +19,7 @@ class TicTacToeView(context: Context?, attrs: AttributeSet?) : View(context, att
     private var paintCircle = Paint()
     private var paintCross = Paint()
 
-    private var paintText = Paint()
-
     private var lock = false
-
-    private var bitmapImg = BitmapFactory.decodeResource(resources, R.drawable.skateboardd)
-
 
     init{
         paintBackground.color = Color.BLACK
@@ -44,29 +36,16 @@ class TicTacToeView(context: Context?, attrs: AttributeSet?) : View(context, att
         paintCross.color = Color.MAGENTA
         paintCross.style = Paint.Style.STROKE
         paintCross.strokeWidth = 5f
-
-        paintText.color = Color.GREEN
-        paintText.textSize = 100f
-
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-
-        paintText.textSize = h / 3f //can use gettextbounds to center
-
-        bitmapImg = Bitmap.createScaledBitmap(bitmapImg, w, h, false)
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        //? denotes skip if null
         canvas?.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paintBackground)
-
-        canvas?.drawText("Test", 0f, height/3f, paintText)
-
-        canvas?.drawBitmap(bitmapImg, 0f, 0f, null)
 
         drawGameArea(canvas)
 
@@ -127,17 +106,17 @@ class TicTacToeView(context: Context?, attrs: AttributeSet?) : View(context, att
     }
 
     fun updateText() {
-        var nextText = "Next player is 0"
+        var nextText = context.getString(R.string.defaultNext)
         if(TicTacToeModel.getNextPlayer() == TicTacToeModel.CROSS) {
-            nextText = "Next player is X"
+            nextText = context.getString(R.string.xNext)
         }
         var winner = TicTacToeModel.checkWin()
         if(winner > TicTacToeModel.EMPTY) {
-            nextText = "Player $winner wins!"
+            nextText = context.getString(R.string.winMessage, winner.toString())
             lock = true
             (context as MainActivity).stopTimer()
         } else if(winner.toInt() == -2) {
-            nextText = "Tie!"
+            nextText = context.getString(R.string.tieMessage)
             (context as MainActivity).stopTimer()
         }
         (context as MainActivity).setMessage(nextText)

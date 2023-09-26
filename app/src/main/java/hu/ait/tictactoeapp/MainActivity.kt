@@ -35,9 +35,4 @@ class MainActivity : AppCompatActivity() {
         binding.timer.stop()
     }
 
-    //for hw 1
-    fun flagMode(): Boolean {
-        return binding.cbTest.isChecked
-    }
-
 }

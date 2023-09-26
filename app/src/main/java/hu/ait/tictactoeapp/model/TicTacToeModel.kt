@@ -1,18 +1,6 @@
 package hu.ait.tictactoeapp.model
 
-import hu.ait.tictactoeapp.MainActivity
-import android.content.Context
 import kotlin.math.max
-
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.PointF
-import android.util.AttributeSet
-import android.view.MotionEvent
-import android.view.View
-import hu.ait.tictactoeapp.model.TicTacToeModel
-
 
 object TicTacToeModel {
     public val EMPTY: Short = 0

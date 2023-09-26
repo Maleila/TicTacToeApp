@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TicTacToeApp</string>
+    <string name="defaultNext">Next player is 0</string>
+    <string name="xNext">Next player is X</string>
+    <string name="tieMessage">Tie!</string>
+    <string name="winMessage">Player %1$s wins!</string>
 </resources>
